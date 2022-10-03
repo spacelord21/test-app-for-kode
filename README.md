@@ -2,7 +2,7 @@
 
 Подключение проекта к репозиторию
 
-Создание базовых компонентов TopAppBar, NavAppBar, PersonItem, PersonCard, LoadingItem, SearchAppBar, ModalWindow - 2 часа
+Создание базовых компонентов TopAppBar, NavAppBar, PersonItem, PersonCard, LoadingItem, SearchAppBar, ModalWindow, DataViewComponent - 2 часа
 
 Определение базовых состояний для компонентов - 1.5 часа
 
@@ -17,7 +17,5 @@
 Сортировка по алфавиту - 1 час
 
 Сортировка по дню рождения - 1.5 часа
-
-
 
 Доп задания:
