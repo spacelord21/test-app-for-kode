@@ -15,6 +15,28 @@ header {
   background-color: #FFFFFF;
 }
 
+.offline-header {
+  background-color: #F44336;
+}
+
+.offline-loading-header {
+  background-color: #6534FF;
+}
+
+.offline-text {
+  margin: 20px 24px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #FFFFFF;
+}
+
+.finder.offline {
+  color: #FFFFFF;
+}
+
 .nav-bar {
   border-bottom: 1px solid #e9e9eb;
 }
@@ -67,6 +89,7 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
   margin-left: auto;
   margin-top: 3px;
   height: 20px;
+  cursor: pointer;
 }
 
 .faBars-active {
@@ -388,6 +411,7 @@ label {
   text-align: center;
   margin-left: 14px;
   color: #050510;
+  cursor: pointer;
 }
 
 .check-radio {
@@ -563,4 +587,43 @@ label {
 #search-image {
   width: 56px;
   height: 56px;
+}
+
+.year-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 24px;
+  gap: 10px;
+  width: 94.5%;
+  justify-content: center;
+  height: 68px;
+  background: #FFFFFF;
+  margin-left: 40px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.line {
+  width: 42%;
+  height: 0px;
+  border: 1px solid #C3C3C6;
+  transform: rotate(180deg);
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+
+.text-line {
+  width: 160px;
+  height: 20px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  color: #C3C3C6;
 }

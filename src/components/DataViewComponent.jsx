@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PersonItem from "./PersonItem";
 import UserService from "../services/UserService";
 import {
+  setCopyDataAction,
   setDataFailureAction,
   setDataStartedAction,
   setDataSucessAction,
@@ -13,35 +14,72 @@ import Fuse from "fuse.js";
 import { setSearchDataAction } from "../store/actionCreators/setQueryAction";
 import NotFoundView from "./NotFoundView";
 import { alphabeticalSort } from "../services/alphabeticalSort";
-import { birthdaySort, isBirthdayThisYear } from "../services/birthdaySort";
+import { birthdaySort } from "../services/birthdaySort";
+import BirthdayViewComponent from "./BirthdayViewComponent";
+import { setConnectionLoadingAction } from "../store/actionCreators/setDisconnectedAction";
 
 export default function DataViewComponent() {
+  const [notFound, setNotFound] = useState(false);
   const dispatch = useDispatch();
+
   const data = useSelector((state) => state.dataReducer.data);
-  const category = useSelector((state) => state.categoryReducer.category);
   const loading = useSelector((state) => state.dataReducer.loading);
   const error = useSelector((state) => state.dataReducer.error);
+  const copyData = useSelector((state) => state.dataReducer.copyData);
+
+  const category = useSelector((state) => state.categoryReducer.category);
+
   const query = useSelector((state) => state.queryReducer.query);
   const searchData = useSelector((state) => state.queryReducer.searchData);
-  const [notFound, setNotFound] = useState(false);
+
   const sortType = useSelector((state) => state.sortTypeReducer.sortType);
 
+  const disconnect = useSelector(
+    (state) => state.disconnectedReducer.isDisconnected
+  );
+  const connectionLoading = useSelector(
+    (state) => state.disconnectedReducer.disconnectedLoading
+  );
+
   useEffect(() => {
-    dispatch(setDataStartedAction());
-    UserService.getPersonFromDepartment(category)
+    UserService.getPersonFromDepartment("all")
       .then((res) => {
-        dispatch(setDataSucessAction(res.data.items));
+        dispatch(setCopyDataAction(res.data.items));
       })
       .catch((err) => {
         console.log(err);
-        dispatch(setDataFailureAction(err));
       });
-  }, [category]);
+  }, []);
+
+  useEffect(() => {
+    if (!disconnect) {
+      dispatch(setDataStartedAction());
+      UserService.getPersonFromDepartment(category)
+        .then((res) => {
+          dispatch(setDataSucessAction(res.data.items));
+          if (connectionLoading) {
+            dispatch(setConnectionLoadingAction(false));
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(setDataFailureAction(err));
+        });
+    } else {
+      dispatch(
+        setDataSucessAction(
+          category === "all"
+            ? copyData
+            : copyData.filter((item) => item.department === category)
+        )
+      );
+    }
+  }, [category, disconnect]);
 
   useEffect(() => {
     const fuse = new Fuse(data, {
       keys: ["firstName", "lastName", "userTag"],
-      threshold: 0.2,
+      threshold: 0.0,
     });
     const result = fuse.search(query);
     const matches = [];
@@ -54,7 +92,7 @@ export default function DataViewComponent() {
       });
       dispatch(setSearchDataAction(matches));
     }
-  }, [query]);
+  }, [query, data]);
 
   return (
     <div>
@@ -68,20 +106,22 @@ export default function DataViewComponent() {
             <NotFoundView />
           ) : (
             <div>
-              {(searchData.length > 0 && query.length > 0
-                ? searchData
-                : data.sort(
-                    sortType === "alphabetical"
-                      ? alphabeticalSort
-                      : birthdaySort
-                  )
-              ).map((item, index) => (
-                <PersonItem
-                  person={item}
-                  key={index}
-                  birthday={sortType === "birthday"}
+              {sortType === "birthday" ? (
+                <BirthdayViewComponent
+                  data={
+                    searchData.length > 0 && query.length > 0
+                      ? searchData
+                      : data.sort(birthdaySort)
+                  }
                 />
-              ))}
+              ) : (
+                (searchData.length > 0 && query.length > 0
+                  ? searchData
+                  : data.sort(alphabeticalSort)
+                ).map((item, index) => (
+                  <PersonItem person={item} key={index} birthday={false} />
+                ))
+              )}
             </div>
           )}
         </div>
