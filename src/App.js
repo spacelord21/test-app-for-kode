@@ -1,27 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import DataViewComponent from "./components/DataViewComponent";
 import NavAppBar from "./components/NavAppBar";
+import PersonProfile from "./components/PersonProfile";
 import TopAppBar from "./components/TopAppBar";
-import UserService from "./services/UserService";
-import { getDataAction } from "./store/actionCreators/getDataAction";
-import { setDataAction } from "./store/actionCreators/setDataAction";
 
 function App() {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.data.data);
-
-  useEffect(() => {
-    UserService.getPersonFromDepartment("all")
-      .then((res) => {
-        dispatch(setDataAction(res.data.items));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const data = useSelector((state) => state.dataReducer.data);
+  console.log(data);
 
   return (
     <div className="App">
@@ -34,6 +21,13 @@ function App() {
             <DataViewComponent key={3} />,
           ]}
         />
+        {data.map((item, index) => (
+          <Route
+            key={index}
+            path={`/${item.firstName.toLowerCase()}-${item.lastName.toLowerCase()}`}
+            element={<PersonProfile person={item} key={index} />}
+          />
+        ))}
       </Routes>
     </div>
   );

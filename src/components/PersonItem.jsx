@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import UserService from "../services/UserService";
+import { getDescription } from "../services/utils";
 
 export default function PersonItem({ person, index, birthday }) {
   return (
@@ -23,7 +23,7 @@ export default function PersonItem({ person, index, birthday }) {
       userTag появляются Tech Lead, string*/}
             </div>
             <div className="person-position">
-              {UserService.getDescription(person.department)}{" "}
+              {getDescription(person.department)}{" "}
               {person.position === "Team Lead" ? person.position : ""}
             </div>
             <span className="mainpage-birthday">

@@ -115,6 +115,7 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
 .active{
   border-bottom: 4px solid #6534FF;
   color: #050510;
+  transition: .2s;
 }
 
 .inactive:hover {
@@ -127,7 +128,6 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
   padding: 0px 0px 8px;
   position: absolute;
   width: 373px;
@@ -168,21 +168,19 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
 }
 
 label {
-font-family: 'Inter';
-font-style: normal;
-font-weight: 570;
-font-size: 16px;
-line-height: 20px;
-display: flex;
-align-items: flex-end;
-text-align: center;
-margin-left: 14px;
-
-color: #050510;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 570;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  margin-left: 14px;
+  color: #050510;
 }
 
 .check-radio {
@@ -208,6 +206,11 @@ color: #050510;
    color:#050510; 
    text-decoration:none; 
    cursor:pointer;  
+}
+
+.two:hover {
+  color: #6534FF;
+  transition: 0.7s;
 }
 
 .person-item {
@@ -274,4 +277,308 @@ img {
   line-height: 16px;
   color: #55555C;
   margin: 3px 0;
+}
+
+.loading {
+  display: flex;
+  flex-direction: row;
+  margin: 22px 16px;
+}
+
+.name {
+  position: relative;
+  margin: 6px 0;
+  width: 144px;
+  height: 16px;
+  border-radius: 15px;
+  background: linear-gradient(90deg, #F3F3F6 0%, #FAFAFA 100%);
+}
+.department {
+  position: relative;
+  width: 80px;
+  height: 12px;
+  border-radius: 15px;
+  background: linear-gradient(90deg, #F3F3F6 0%, #FAFAFA 100%);
+}
+
+.error-page,
+.empty-search-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 15vh;
+}
+
+#spaceship-image {
+  width: 56px;
+  height: 56px;
+}
+
+#error-text-1 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 22px;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #050510;
+}
+
+#error-text-2 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #97979B;
+  margin-bottom: 12px;
+}
+
+#error-text-3 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #6534FF;
+  cursor: pointer;
+}
+
+.modal-window {
+  font-family: 'Inter';
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 0px 8px;
+  position: absolute;
+  width: 373px;
+  height: 192px;
+  top: calc(50% - 192px/2); 
+  background:  #FFFFFF;
+  border-radius: 20px;
+  position: absolute; 
+  left: 35%;
+  top: 40%;
+}
+
+#close {
+  position: absolute;
+  right: 30px;
+  top: 28px;
+  width: 17px;
+  height: 17px;
+  color:#F7F7F8;
+  background-color: #C3C3C6;
+  border-radius: 12px;
+}
+
+#sort {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #050510;
+  margin-top: 24px;
+  }
+
+.radio-input {
+  margin: 20px 0 0 18px;
+  height: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+label {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 570;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  margin-left: 14px;
+  color: #050510;
+}
+
+.check-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #6534FF;
+}
+
+.check-radio:checked {
+  border: 6px solid #6534FF;
+}
+
+.year-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 24px;
+  gap: 10px;
+  width: 94.5%;
+  justify-content: center;
+  height: 68px;
+  background: #FFFFFF;
+  margin-left: 40px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.line {
+  width: 42%;
+  height: 0px;
+  border: 1px solid #C3C3C6;
+  transform: rotate(180deg);
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+
+.text-line {
+  width: 160px;
+  height: 20px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  color: #C3C3C6;
+}
+.mainpage-birthday {
+  position: absolute;
+  width: 50px;
+  height: 20px;
+  right: 20px;
+  margin-top: 9px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: right;
+  color: #55555C;
+}
+
+.person-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 280px;
+  margin: 0;
+  padding: 0;
+  background: #F7F7F8;
+}
+
+.person-data {
+  display: flex;
+  flex-direction: row;
+}
+
+.person-data-name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: #050510;
+}
+
+.person-body {
+  margin: 27px 16px;
+}
+
+.person-data-text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #050510;
+  margin: 0 14px;
+}
+
+.person-data-tag {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 22px;
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #97979B;
+}
+
+.person-data-position {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  margin-top: 12px;
+  text-align: center;
+  color: #55555C;
+}
+
+.person-image {
+  width: 104px;
+  height: 104px;
+  margin-bottom: 24px;
+  filter: drop-shadow(0px 1px 5px rgba(22, 30, 52, 0.039)) drop-shadow(0px 8px 12px rgba(22, 30, 52, 0.08));
+  border-radius: 64px;
+}
+
+.person-birthday {
+  display: flexbox;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.personcard-age {
+  position: absolute;
+  text-align: right;
+  margin-top: -20px;
+  margin-right: 20px;
+  width: 61px;
+  height: 20px;
+  right: 4px;
+  color: #97979B;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: right;
+}
+
+#button-back {
+  position: absolute;
+  top: 28.76px;
+  left: 32.87px;
+}
+
+#search-image {
+  width: 56px;
+  height: 56px;
 }

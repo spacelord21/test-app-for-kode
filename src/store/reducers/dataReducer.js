@@ -1,14 +1,19 @@
-import { GET_DATA } from "../actions/getData";
-import { SET_DATA } from "../actions/setData";
+import {
+  SET_DATA_FAILURE,
+  SET_DATA_STARTED,
+  SET_DATA_SUCCESS,
+} from "../actions/setData";
 
-const initialState = { data: [] };
+const initialState = { data: [], loading: false, error: null };
 
 export const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_DATA:
-      return { ...state, data: action.payload };
-    case GET_DATA:
-      return state;
+    case SET_DATA_STARTED:
+      return { ...state, loading: true };
+    case SET_DATA_SUCCESS:
+      return { ...state, data: action.payload, loading: false, error: null };
+    case SET_DATA_FAILURE:
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
