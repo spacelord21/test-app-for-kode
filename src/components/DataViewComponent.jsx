@@ -13,7 +13,7 @@ import Fuse from "fuse.js";
 import { setSearchDataAction } from "../store/actionCreators/setQueryAction";
 import NotFoundView from "./NotFoundView";
 import { alphabeticalSort } from "../services/alphabeticalSort";
-import { birthdaySort } from "../services/birthdaySort";
+import { birthdaySort, isBirthdayThisYear } from "../services/birthdaySort";
 
 export default function DataViewComponent() {
   const dispatch = useDispatch();

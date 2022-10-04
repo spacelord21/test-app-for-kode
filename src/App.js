@@ -8,7 +8,6 @@ import TopAppBar from "./components/TopAppBar";
 
 function App() {
   const data = useSelector((state) => state.dataReducer.data);
-  console.log(data);
 
   return (
     <div className="App">

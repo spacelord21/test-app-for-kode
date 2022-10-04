@@ -16,16 +16,21 @@ export default function ModalWindow({ visible, sortType }) {
   };
 
   return visible ? (
-    <div className="modal-window">
-      <FontAwesomeIcon
-        icon={faCircleXmark}
-        id="close"
-        onClick={() => {
-          dispatch(setVisibleModalWindowAction(false));
-        }}
-      />
-      <h2 id="sort">Сортировка</h2>
+    <div className={visible ? "modal active" : "modal"}>
       <div className="modal-content">
+        <div className="modal-header">
+          <span>
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              id="close"
+              onClick={() => {
+                dispatch(setVisibleModalWindowAction(false));
+              }}
+            />
+            <h2 id="sort">Сортировка</h2>
+          </span>
+        </div>
+
         <div className="radio-input">
           <input
             type="radio"
