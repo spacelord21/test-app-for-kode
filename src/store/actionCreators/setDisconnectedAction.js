@@ -1,3 +1,4 @@
+import { createAction } from "@reduxjs/toolkit";
 import {
   SET_DISCONNECTED,
   SET_CONNECTION_LOADING,
@@ -16,3 +17,6 @@ export const setConnectionLoadingAction = (value) => {
     payload: value,
   };
 };
+
+export const onOnline = createAction("__rtkq/online");
+export const onOffline = createAction("__rtkq/offline");

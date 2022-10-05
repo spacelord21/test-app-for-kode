@@ -1,5 +1,7 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { combineReducers } from "redux";
+import { usersApi } from "../services/usersApi";
 import { activeCategoryReducer } from "./reducers/activeCategoryReducer";
 import { activeSortTypeReducer } from "./reducers/activeSortTypeReducer";
 import { dataReducer } from "./reducers/dataReducer";
@@ -12,12 +14,13 @@ const rootReducer = combineReducers({
   queryReducer: searchQueryReducer,
   sortTypeReducer: activeSortTypeReducer,
   disconnectedReducer: disconnectedReducer,
+  [usersApi.reducerPath]: usersApi.reducer,
 });
 
-const middleware = getDefaultMiddleware({
-  immutableCheck: false,
-  serializableCheck: false,
-  thunk: true,
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(usersApi.middleware),
 });
 
-export const store = configureStore({ reducer: rootReducer, middleware });
+setupListeners(store.dispatch);

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ModalWindow from "./ModalWindow";
 import SearchComponent from "./SearchComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { setVisibleModalWindowAction } from "../store/actionCreators/setActiveSortTypeAction";
+import { useGetUsersQuery } from "../services/usersApi";
+import { setConnectionLoadingAction } from "../store/actionCreators/setDisconnectedAction";
 
 export default function TopAppBar() {
   const dispatch = useDispatch();
@@ -13,9 +15,15 @@ export default function TopAppBar() {
   const disconnect = useSelector(
     (state) => state.disconnectedReducer.isDisconnected
   );
-  const connectionLoading = useSelector(
-    (state) => state.disconnectedReducer.disconnectedLoading
+  const connecting = useSelector(
+    (state) => state.disconnectedReducer.connectingLoading
   );
+  const category = useSelector((state) => state.categoryReducer.category);
+  const { isFetching } = useGetUsersQuery(category);
+
+  useEffect(() => {
+    if (!isFetching && connecting) dispatch(setConnectionLoadingAction());
+  }, [isFetching]);
 
   return (
     <div>
@@ -23,23 +31,19 @@ export default function TopAppBar() {
         className={
           disconnect
             ? "offline-header"
-            : connectionLoading
+            : connecting && isFetching
             ? "offline-loading-header"
             : ""
         }
       >
-        <h3
-          className={
-            disconnect || connectionLoading ? "finder offline" : "finder"
-          }
-        >
+        <h3 className={disconnect || connecting ? "finder offline" : "finder"}>
           Поиск
         </h3>
         {disconnect ? (
           <p className="offline-text">
             Не могу обновить данные. Проверь соединение с интернетом.
           </p>
-        ) : connectionLoading ? (
+        ) : connecting ? (
           <p className="offline-text">Секундочку, гружусь...</p>
         ) : (
           <div className="find-area">

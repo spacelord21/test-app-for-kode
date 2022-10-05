@@ -5,36 +5,32 @@ import DataViewComponent from "./components/DataViewComponent";
 import NavAppBar from "./components/NavAppBar";
 import PersonProfile from "./components/PersonProfile";
 import TopAppBar from "./components/TopAppBar";
-import { setDisconnectedAction } from "./store/actionCreators/setDisconnectedAction";
+import {
+  onOffline,
+  onOnline,
+  setConnectionLoadingAction,
+  setDisconnectedAction,
+} from "./store/actionCreators/setDisconnectedAction";
 import { useEffect } from "react";
+import { useGetUsersQuery } from "./services/usersApi";
 
 function App() {
-  const data = useSelector((state) => state.dataReducer.data);
-
   const dispatch = useDispatch();
-
-  function handleConnectionChange() {
-    const condition = navigator.onLine ? "online" : "offline";
-    if (condition === "online") {
-      const webConnection = setInterval(() => {
-        fetch("//google.com", { mode: "no-cors" })
-          .then(() => {
-            dispatch(setDisconnectedAction(false));
-            return clearInterval(webConnection);
-          })
-          .catch(() => {
-            dispatch(setDisconnectedAction(true));
-          });
-      }, 2000);
-      return;
-    }
-    return dispatch(setDisconnectedAction(true));
-  }
+  const category = useSelector((state) => state.categoryReducer.category);
+  const { data = [] } = useGetUsersQuery(category);
 
   useEffect(() => {
-    window.addEventListener("online", handleConnectionChange);
-    window.addEventListener("offline", handleConnectionChange);
-  });
+    window.addEventListener("online", () => {
+      dispatch(onOnline());
+      dispatch(setDisconnectedAction(false));
+      dispatch(setConnectionLoadingAction(true));
+    });
+    window.addEventListener("offline", () => {
+      dispatch(onOffline());
+      dispatch(setDisconnectedAction(true));
+    });
+  }, []);
+
   return (
     <div className="App">
       <Routes>

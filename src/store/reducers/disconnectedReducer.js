@@ -3,7 +3,7 @@ import {
   SET_CONNECTION_LOADING,
 } from "../actions/setDisconnected";
 
-const initialState = { isDisconnected: false, disconnectedLoading: false };
+const initialState = { isDisconnected: false, connectingLoading: false };
 
 export const disconnectedReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -11,10 +11,9 @@ export const disconnectedReducer = (state = initialState, action) => {
       return {
         ...state,
         isDisconnected: action.payload,
-        disconnectedLoading: true,
       };
     case SET_CONNECTION_LOADING:
-      return { ...state, disconnectedLoading: action.payload };
+      return { ...state, connectingLoading: action.payload };
     default:
       return state;
   }
