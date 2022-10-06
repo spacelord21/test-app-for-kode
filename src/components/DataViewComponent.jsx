@@ -12,34 +12,32 @@ import { birthdaySort } from "../services/birthdaySort";
 import BirthdayViewComponent from "./BirthdayViewComponent";
 import { useGetUsersQuery } from "../services/usersApi";
 
-export default function DataViewComponent() {
+export default function DataViewComponent({ copyData }) {
   const [notFound, setNotFound] = useState(false);
   const dispatch = useDispatch();
-
-  const copyData = useSelector((state) => state.dataReducer.copyData);
-
   const category = useSelector((state) => state.categoryReducer.category);
-
   const query = useSelector((state) => state.queryReducer.query);
   const searchData = useSelector((state) => state.queryReducer.searchData);
-
   const sortType = useSelector((state) => state.sortTypeReducer.sortType);
-
   const disconnect = useSelector(
     (state) => state.disconnectedReducer.isDisconnected
   );
-  const { data, isLoading, error, isFetching } = useGetUsersQuery(category);
+  var { data, isLoading, error, isFetching } = useGetUsersQuery(category, {
+    skip: disconnect,
+  });
 
   useEffect(() => {
-    if (disconnect) console.log(data);
-  }, [disconnect]);
+    if (!isLoading) dispatch(setCopyDataAction(data));
+  }, [isLoading]);
 
   useEffect(() => {
-    if (!isFetching) {
+    if (!query) return;
+    if (!isFetching && !disconnect) {
       const fuse = new Fuse(data, {
         keys: ["firstName", "lastName", "userTag"],
         threshold: 0.0,
       });
+      console.log(query);
       const result = fuse.search(query);
       const matches = [];
       if (!result.length && query.length !== 0) {
@@ -58,7 +56,9 @@ export default function DataViewComponent() {
   if (isLoading || isFetching) {
     return <LoadingScreen />;
   }
-  if (error) return <ErrorScreen />;
+  if (error) {
+    return <ErrorScreen />;
+  }
   if (notFound) return <NotFoundView />;
 
   return (
@@ -71,6 +71,15 @@ export default function DataViewComponent() {
               : [...data].sort(birthdaySort)
           }
         />
+      ) : disconnect ? (
+        [...copyData]
+          .sort(alphabeticalSort)
+          .filter((item) =>
+            category === "all" ? item : item.department === category
+          )
+          .map((item, index) => (
+            <PersonItem person={item} key={index} birthday={false} />
+          ))
       ) : (
         (searchData.length > 0 && query.length > 0
           ? searchData

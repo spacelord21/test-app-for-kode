@@ -1,4 +1,1 @@
-export const SET_DATA_STARTED = "SET_DATA_STARTED";
-export const SET_DATA_SUCCESS = "SET_DATA_SUCCESS";
-export const SET_DATA_FAILURE = "SET_DATA_FAILURE";
 export const SET_COPY_DATA = "SET_COPY_DATA";

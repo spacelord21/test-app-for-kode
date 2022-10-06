@@ -3,7 +3,7 @@ import React from "react";
 export default function LoadingScreen() {
   return (
     <div>
-      {[...Array(6)].map((index) => (
+      {[...Array(6)].map((item, index) => (
         <div key={index} className="loading">
           <div className="photo"></div>
           <div className="info">

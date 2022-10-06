@@ -19,7 +19,7 @@ export default function TopAppBar() {
     (state) => state.disconnectedReducer.connectingLoading
   );
   const category = useSelector((state) => state.categoryReducer.category);
-  const { isFetching } = useGetUsersQuery(category);
+  const { isFetching } = useGetUsersQuery(category, { skip: disconnect });
 
   useEffect(() => {
     if (!isFetching && connecting) dispatch(setConnectionLoadingAction());
