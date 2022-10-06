@@ -1,4 +1,4 @@
-import SWITCHES from "./switches-variables";
+import SWITCHES from "./CONSTANT";
 
 export const getDescription = (department) => {
   var description = SWITCHES.items.find(

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SWITCHES from "../services/switches-variables";
+import SWITCHES from "../services/CONSTANT";
 import { setActiveCategoryAction } from "../store/actionCreators/setActiveCategoryAction";
 
 export default function NavAppBar() {
@@ -9,11 +9,11 @@ export default function NavAppBar() {
 
   return (
     <div className="categories">
-      {SWITCHES.items.slice(0, 6).map((item, index) => (
+      {SWITCHES.items.slice(0, 13).map((item, index) => (
         <div
           className={item.department === category ? "active" : "inactive"}
           key={index}
-          onClick={(e) => {
+          onClick={() => {
             dispatch(setActiveCategoryAction(item.department));
           }}
         >
