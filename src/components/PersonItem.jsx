@@ -19,8 +19,6 @@ export default function PersonItem({ person, index, birthday }) {
                 {person.firstName} {person.lastName}
               </span>
               <span className="user-tag"> {person.userTag}</span>
-              {/* в данных что-то напутано, иногда в
-      userTag появляются Tech Lead, string*/}
             </div>
             <div className="person-position">
               {getDescription(person.department)}{" "}
