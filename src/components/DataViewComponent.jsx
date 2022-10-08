@@ -31,7 +31,7 @@ export default function DataViewComponent({ copyData }) {
   }, [isLoading]);
 
   useEffect(() => {
-    if (!query) return;
+    if (query === "undefined") return;
     if (!isFetching && !disconnect) {
       const fuse = new Fuse(data, {
         keys: ["firstName", "lastName", "userTag"],

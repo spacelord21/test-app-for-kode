@@ -8,10 +8,7 @@
 
 header {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  padding: auto;
-  justify-content: center;
   background-color: #FFFFFF;
 }
 
@@ -56,7 +53,7 @@ header {
 }
 
 .main-input {
-  width: 100%;
+  width: 200%;
   outline: none;
   border: none;
   background-color: #f7f7f8;
@@ -85,7 +82,6 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
 .faBars,
 .faBars-active {
   color: #C3C3C6;
-  order: 999;
   margin-left: auto;
   margin-top: 3px;
   height: 20px;
@@ -116,7 +112,6 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
   margin-top: 12px;
   margin-left: 16px;
   border-bottom: 1px solid rgb(211, 211, 211);
-  align-items: center;
 }
 
 .inactive, .active {
@@ -129,7 +124,6 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
   font-size: 15px;
   font-weight: 600;
   height: 40px;
-  text-align: center;
   align-items: center;
   white-space:nowrap;
 }
@@ -183,7 +177,6 @@ input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s eas
   display: flex;
   flex-direction: row;
   justify-content: center;
-
 }
 
 #close {
@@ -262,7 +255,6 @@ label {
 .person-item {
   display: flex;
   flex-direction: row;
-  left: 0;
   margin: 22px 16px;
   cursor: pointer;
 }
@@ -271,7 +263,6 @@ img {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  overflow: hidden;
 }
 
 .photo {
@@ -394,79 +385,6 @@ img {
   cursor: pointer;
 }
 
-.radio-input {
-  margin: 20px 0 0 18px;
-  height: 30px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-label {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 570;
-  font-size: 16px;
-  line-height: 20px;
-  display: flex;
-  align-items: flex-end;
-  text-align: center;
-  margin-left: 14px;
-  color: #050510;
-  cursor: pointer;
-}
-
-.check-radio {
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #6534FF;
-}
-
-.check-radio:checked {
-  border: 6px solid #6534FF;
-}
-
-.year-line {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 24px;
-  gap: 10px;
-  width: 94.5%;
-  justify-content: center;
-  height: 68px;
-  background: #FFFFFF;
-  margin-left: 40px;
-  flex: none;
-  order: 1;
-  align-self: stretch;
-  flex-grow: 0;
-}
-
-.line {
-  width: 42%;
-  height: 0px;
-  border: 1px solid #C3C3C6;
-  transform: rotate(180deg);
-  flex: none;
-  order: 0;
-  flex-grow: 1;
-}
-
-.text-line {
-  width: 160px;
-  height: 20px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 20px;
-  text-align: center;
-  color: #C3C3C6;
-}
 .mainpage-birthday {
   position: absolute;
   width: 50px;
@@ -484,22 +402,20 @@ label {
 
 .person-header {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 280px;
-  margin: 0;
-  padding: 0;
   background: #F7F7F8;
 }
 
-.person-data {
+.person-profile {
   display: flex;
   flex-direction: row;
 }
 
-.person-data-name {
+.person-profile-name {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
@@ -513,7 +429,7 @@ label {
   margin: 27px 16px;
 }
 
-.person-data-text {
+.person-profile-text {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -523,7 +439,7 @@ label {
   margin: 0 14px;
 }
 
-.person-data-tag {
+.person-profile-tag {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -536,7 +452,7 @@ label {
   color: #97979B;
 }
 
-.person-data-position {
+.person-profile-position {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -563,7 +479,7 @@ label {
   margin-bottom: 48px;
 }
 
-.personcard-age {
+.person-profile-age {
   position: absolute;
   text-align: right;
   margin-top: -20px;
@@ -595,26 +511,18 @@ label {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 24px;
-  gap: 10px;
   width: 94.5%;
-  justify-content: center;
   height: 68px;
   background: #FFFFFF;
   margin-left: 40px;
   flex: none;
   order: 1;
-  align-self: stretch;
-  flex-grow: 0;
 }
 
 .line {
   width: 42%;
   height: 0px;
   border: 1px solid #C3C3C6;
-  transform: rotate(180deg);
-  flex: none;
-  order: 0;
   flex-grow: 1;
 }
 
